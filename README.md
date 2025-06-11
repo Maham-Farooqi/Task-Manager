@@ -18,14 +18,21 @@ All sensitive endpoints are protected using JWT authentication middleware.
 
 Following are Set Up instructions:
 Clone the Project Repository
+
 Navigate to the Project Directory : cd task-manager then cd client 
+
 Install Server Dependencies using npm install
+
 Create .env file and add: 
+
 PORT=3000
 MONGO_URI=mongodb://localhost:27017/taskmanager
 JWT_SECRET=key
+
 Start MongoDB Server 
+
 For backend navigate to cd server
+
 Install Server Dependencies using npm install and then run node server.js
 
 
