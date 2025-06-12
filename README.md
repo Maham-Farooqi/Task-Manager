@@ -25,8 +25,8 @@ Install Server Dependencies using npm install
 
 Create .env file and add: 
 
-PORT=3000
-MONGO_URI=mongodb://localhost:27017/taskmanager
+PORT=3000,
+MONGO_URI=mongodb://localhost:27017/taskmanager,
 JWT_SECRET=key
 
 Start MongoDB Server 
@@ -41,7 +41,7 @@ Node.js – Server runtime environment
 
 Express – Web framework for Node.js
 
-MongoDB & Mongoose – Database and ODM for managing data
+MongoDB & Mongoose – Database  for managing data
 
 JWT – For secure user authentication
 
