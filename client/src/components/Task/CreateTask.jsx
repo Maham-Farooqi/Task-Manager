@@ -14,7 +14,7 @@ const CreateTask = () => {
   const onSubmit = async (data) => {
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://localhost:3000/task/tasks', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/task/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -26,7 +26,7 @@ const Profile = () => {
       }
 
       try {
-        const res = await fetch('http://localhost:3000/user/profile', {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/user/profile`, {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${token}` }
         });
@@ -39,7 +39,7 @@ const Profile = () => {
         const responseData = await res.json();
         setProfile(responseData);
 
-        const tasks = await fetch('http://localhost:3000/task/summary', {
+        const tasks = await fetch(`${import.meta.env.VITE_API_URL}/task/summary`, {
           method: 'GET',
           headers: { 'Authorization': `Bearer ${token}` }
         });

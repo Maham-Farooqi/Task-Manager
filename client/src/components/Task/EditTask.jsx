@@ -21,7 +21,7 @@ const EditTask = () => {
       const fetchTask = async () => {
         try {
           const token = localStorage.getItem('token');
-          const res = await fetch(`http://localhost:3000/task/task/${id}`, {
+          const res = await fetch(`${import.meta.env.VITE_API_URL}/task/task/${id}`, {
             headers: { Authorization: `Bearer ${token}` }
           });
           const task = await res.json();
@@ -50,7 +50,7 @@ const EditTask = () => {
 
   const onSubmit = async (data) => {
     const token = localStorage.getItem('token');
-    const url = `http://localhost:3000/task/tasks/${id}`
+    const url = `${import.meta.env.VITE_API_URL}/task/tasks/${id}`
     const method = 'PUT';
 
     try {
