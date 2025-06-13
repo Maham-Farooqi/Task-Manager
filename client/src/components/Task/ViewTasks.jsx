@@ -36,7 +36,7 @@ const ViewTasks = () => {
 
     const token = localStorage.getItem('token');
     try {
-      await fetch(`http://localhost:3000/task/delete/${taskId}`, {
+      await fetch(`${import.meta.env.VITE_API_URL}/task/delete/${taskId}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -53,7 +53,7 @@ const ViewTasks = () => {
       const task = tasks.find(t => t._id === taskId);
       const updatedStatus = task.status === 'Completed' ? 'Pending' : 'Completed';
 
-      const res = await fetch(`http://localhost:3000/task/tasks/${taskId}/toggle`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/task/tasks/${taskId}/toggle`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -149,7 +149,7 @@ const ViewTasks = () => {
       setLoading(true);
 
       try {
-        const res = await fetch('http://localhost:3000/task/tasks', {
+        const res = await fetch('${import.meta.env.VITE_API_URL}/task/tasks', {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` },
         });
