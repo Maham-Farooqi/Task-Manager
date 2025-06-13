@@ -4,6 +4,11 @@ import { IoFilter } from 'react-icons/io5';
 import { FaSearch } from 'react-icons/fa';
 import { FaEdit, FaTrash, FaCheckCircle, FaRegCircle } from 'react-icons/fa';
 import Navbar from '../Navbar';
+import { jsPDF } from 'jspdf';
+import autoTable from 'jspdf-autotable';
+import { FaDownload } from 'react-icons/fa';
+
+
 
 const ViewTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -67,7 +72,73 @@ const ViewTasks = () => {
     }
   };
 
+  const exportToPDF = () => {
+    const doc = new jsPDF();
 
+    doc.setFontSize(20);
+    doc.setTextColor(40, 53, 147);
+    doc.setFont('helvetica', 'bold');
+    doc.text('My Task List', 105, 15, { align: 'center' });
+
+    doc.setFontSize(12);
+    doc.setTextColor(81, 81, 81);
+    doc.text(`Generated: ${new Date().toLocaleString()}`, 105, 22, { align: 'center' });
+
+
+
+    const tableData = filteredTasks.map((task, i) => [
+      i + 1,
+      task.name,
+      task.description.substring(0, 50) + (task.description.length > 50 ? '...' : ''),
+      new Date(task.dueDate).toLocaleDateString(),
+      task.status,
+      task.priority
+    ]);
+
+    const headers = [
+      'S#',
+      'Task Name',
+      'Description',
+      'Due Date',
+      'Status',
+      'Priority'
+    ];
+
+    autoTable(doc, {
+      head: [headers],
+      body: tableData,
+      startY: 30,
+      styles: {
+        cellPadding: 2,
+        fontSize: 10,
+        valign: 'middle',
+        halign: 'center',
+        overflow: 'linebreak'
+
+      },
+      margin: { right: 20, left: 20 },
+      tableWidth: 'wrap',
+      columnStyles: {
+        0: { cellWidth: 9 },
+        1: { cellWidth: 30 },
+        2: { cellWidth: 60 },
+        3: { cellWidth: 25 },
+        4: { cellWidth: 25 },
+        5: { cellWidth: 20 }
+      },
+      didDrawPage: (data) => {
+        const pageCount = doc.internal.getNumberOfPages();
+        doc.setFontSize(10);
+        doc.text(
+          `Page ${data.pageNumber} of ${pageCount}`,
+          data.settings.margin.left,
+          doc.internal.pageSize.height - 10
+        );
+      }
+    });
+
+    doc.save('tasks.pdf');
+  };
   useEffect(() => {
     const fetchTasks = async () => {
       const token = localStorage.getItem('token');
@@ -206,9 +277,17 @@ const ViewTasks = () => {
                 <button className="btn btn-sm btn-secondary w-100" onClick={resetFilters}>
                   Reset Filters
                 </button>
+
+
               </div>
             )}
           </div>
+         
+          <button className="btn btn-success d-flex align-items-center gap-2 p-2" 
+          onClick={exportToPDF} disabled={filteredTasks.length === 0}   title="Download tasks" 
+>
+            <FaDownload />
+          </button>
         </div>
 
         {filteredTasks.length === 0 ? (

@@ -1,4 +1,7 @@
 const Task = require('../models/taskModel')
+const dotenv = require('dotenv')
+
+dotenv.config();
 
 const displayTasks = async (req, res) => {
     try {
@@ -14,7 +17,7 @@ const displayTasks = async (req, res) => {
 
 const createTask = async (req, res) => {
     const { name, description, dueDate, status, priority } = req.body;
-    console.log( name, description, dueDate, status, priority)
+    console.log(name, description, dueDate, status, priority)
     try {
         const task = new Task({
             name,
@@ -127,6 +130,8 @@ const findTask = async (req, res) => {
     }
 };
 
+
+
 module.exports = {
-    displayTasks, createTask, updateTask, deleteTask, toggleStatus, summaryTasks,findTask
+    displayTasks, createTask, updateTask, deleteTask, toggleStatus, summaryTasks, findTask, 
 };

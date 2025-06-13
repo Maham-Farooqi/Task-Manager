@@ -11,5 +11,4 @@ router.delete('/tasks/:id',verify,task.deleteTask)
 router.patch('/tasks/:id/toggle', verify, task.toggleStatus);
 router.get('/summary',verify,task.summaryTasks)
 
-
 module.exports=router

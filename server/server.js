@@ -15,6 +15,7 @@ app.use(cors())
 app.use('/user', userRoute);
 app.use('/task', taskRoute);
 
+require('./controllers/mail')
 let connection=mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected!'));
 const port = process.env.PORT 
