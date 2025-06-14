@@ -149,7 +149,7 @@ const ViewTasks = () => {
       setLoading(true);
 
       try {
-        const res = await fetch('${import.meta.env.VITE_API_URL}/task/tasks', {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/task/tasks`, {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` },
         });
