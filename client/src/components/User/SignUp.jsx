@@ -46,8 +46,8 @@ const SignUp = () => {
 
 
     return (
-        <div className="fullscreen-bg d-flex align-items-center justify-content-center vh-100">
-            <div className='shadow p-4 border rounded bg-white bg-opacity-75 backdrop-blur' style={{ maxWidth: "500px", width: "100%" }}>
+      <div className="fullscreen-bg d-flex align-items-center justify-content-center p-4"   style={{ minHeight: "100vh" }}>
+        <div className='shadow p-4 border rounded bg-white bg-opacity-75 backdrop-blur my-4 ' style={{ maxWidth: "500px", width: "100%" }}>
                 <h2 className='text-center text-primary mb-4'>Create an Account</h2>
 
                 {isSubmitting && (
